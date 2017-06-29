@@ -1,0 +1,6 @@
+import '/imports/api/bitfinex'
+import '/imports/api/gemini'
+import '/imports/api/kraken'
+import '/imports/api/poloniex'
+import '/imports/api/algorithm'
+import '/imports/api/system-log'
