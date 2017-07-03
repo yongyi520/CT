@@ -1,15 +1,15 @@
 import { GeminiAPI } from '/imports/api/gemini/lib/geminiRestAPI.js';
 
-
-var key = Meteor.settings.gemini.key;
-var secret = Meteor.settings.gemini.secret;
-
-const restClient = new GeminiAPI({ key, secret, sandbox: false });
-
-// var key = Meteor.settings.geminiSandBox.key;
-// var secret = Meteor.settings.geminiSandBox.secret;
 //
-// const restClient = new GeminiAPI({ key, secret, sandbox: true });
+// var key = Meteor.settings.gemini.key;
+// var secret = Meteor.settings.gemini.secret;
+//
+// const restClient = new GeminiAPI({ key, secret, sandbox: false });
+
+var key = Meteor.settings.geminiSandBox.key;
+var secret = Meteor.settings.geminiSandBox.secret;
+
+const restClient = new GeminiAPI({ key, secret, sandbox: true });
 
 export const getAllSymbols = function(){
     return restClient.getAllSymbols();

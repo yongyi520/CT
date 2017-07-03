@@ -1,14 +1,14 @@
 import { GeminiAPIWebsocketClient } from '/imports/api/gemini/lib/websocketClient.js';
 
-var key = Meteor.settings.gemini.key;
-var secret = Meteor.settings.gemini.secret;
-
-var websocketClient = new GeminiAPIWebsocketClient({ key, secret, sandbox: false })
-
-// var key = Meteor.settings.geminiSandBox.key;
-// var secret = Meteor.settings.geminiSandBox.secret;
+// var key = Meteor.settings.gemini.key;
+// var secret = Meteor.settings.gemini.secret;
 //
-// var websocketClient = new GeminiAPIWebsocketClient({ key, secret, sandbox: true });
+// var websocketClient = new GeminiAPIWebsocketClient({ key, secret, sandbox: false })
+
+var key = Meteor.settings.geminiSandBox.key;
+var secret = Meteor.settings.geminiSandBox.secret;
+
+var websocketClient = new GeminiAPIWebsocketClient({ key, secret, sandbox: true });
 
 export const getWebsocketClient = function(){
     return websocketClient;

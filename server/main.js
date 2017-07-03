@@ -6,8 +6,8 @@ import { getAlgorithmSettings, setAlgorithm } from '/imports/api/algorithm/algor
 
 
 Meteor.startup(function(){
-    console.log("algorithm setting", getAlgorithmSettings());
-    geminiBuySellAlgorithm();
-    geminiCancelOrderCollectionCleanupTask();
-    SyncedCron.start();
+    // console.log("algorithm setting", getAlgorithmSettings());
+    // geminiBuySellAlgorithm();
+    // geminiCancelOrderCollectionCleanupTask();
+    // SyncedCron.start();
 })

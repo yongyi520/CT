@@ -3,7 +3,8 @@ import { getAllSymbols, getMyAvailableBalances, newOrder, cancelOrder,
 
 import { getWebsocketClient, openMarketSocket, openOrderSocket } from '/imports/api/gemini/websocketAPI.js';
 
-import { getGeminiLastHourlyPriceRange } from '/imports/api/price-tracker/hourly-price.js';
+// price range
+import { getGeminiLastHourlyPriceRange } from '/imports/api/gemini/algorithm/gemini-price-tracker/gemini-price-tracker.js';
 import { getGeminiLastThirtyMinutePriceRange } from '/imports/api/price-tracker/thirty-minute-price.js';
 
 import { GeminiOrders } from '/imports/api/gemini/collections/geminiOrders.js';
@@ -180,13 +181,9 @@ Meteor.methods({
 // previous hour data
 Meteor.methods({
     getGeminiLastHourlyPriceRange: function(){
-        getGeminiLastHourlyPriceRange().then(function(response){
+        getGeminiLastHourlyPriceRange('ethusd').then(function(response){
             console.log("price range for gemini");
-            console.log(response.data.Data[0]);
-            var high = response.data.Data[0].high;
-            var low = response.data.Data[0].low;
-            var buyPrices = [low * .98, low * .97, low * .96];
-            console.log("buy prices", buyPrices);
+            console.log(response.data);
         })
     },
     getGeminiThirtyMinutePriceRange: function(){
