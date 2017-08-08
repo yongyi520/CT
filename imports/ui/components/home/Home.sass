@@ -1,0 +1,45 @@
+#home
+  position: relative
+  height: 100vh
+  .header
+    width: 100%
+    height: 42px
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    .left
+      flex: 1
+      background: #000
+      height: 100%
+    .right
+      flex: 1
+      height: 100%
+      background: blue
+  .content-wrapper
+    width: 100%
+    height: calc(100vh - 42px)
+    .content
+      display: flex
+      flex-direction: row
+      height: 100%
+      width: 100%
+      .main-content
+        flex: 6
+        display: flex
+        flex-direction: row
+        background: green
+        .side-menu
+          flex: 2
+        .content
+          flex: 8
+
+      .side-content
+        flex: 4
+        display: flex
+        flex-direction: column
+        background: orange
+        .top-menu
+          flex: 2
+        .content
+          flex: 8

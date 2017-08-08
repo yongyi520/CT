@@ -4,6 +4,8 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { GeminiOrders } from '/imports/api/gemini/collections/geminiOrders.js';
 import { SystemLogs } from '/imports/api/system-log/SystemLogs.js';
 
+import { compose } from 'react-komposer';
+
 require('./ExchangeAPI.sass');
 
 class ExchangeAPI extends Component {
@@ -214,13 +216,35 @@ class ExchangeAPI extends Component {
     }
 }
 
-export default ExchangeAPIContainer = createContainer( () => {
-    const subscription = Meteor.subscribe("SystemLogs");
-    const loading = !subscription.ready();
-    const logExist = !loading;
-    const logs = logExist ? SystemLogs.find().fetch() : [];
-    return {
-        loading: loading,
-        logs: logs
+// export default ExchangeAPIContainer = createContainer( () => {
+//     const subscription = Meteor.subscribe("SystemLogs");
+//     const loading = !subscription.ready();
+//     const logExist = !loading;
+//     const logs = logExist ? SystemLogs.find().fetch() : [];
+//     return {
+//         loading: loading,
+//         logs: logs
+//     }
+// }, ExchangeAPI );
+
+function getTrackerLoader(reactiveMapper){
+    return (props, onData, env) => {
+        let trackerCleanup = null;
+        const handler = Tracker.nonreactive(() => {
+          return Tracker.autorun(() => {
+              // assign cleanup function
+              trackerCleanup = reactiveMapper(props, onData, env);
+          })
+        })
     }
-}, ExchangeAPI );
+}
+
+// usage
+function reactiveMapper(props, onData){
+    if(Meteor.subscribe('SystemLogs').ready()){
+        const logs = SystemLogs.find().fetch();
+        onData(null, {logs});
+    }
+}
+
+export default ExchangeAPIContainer = compose(getTrackerLoader(reactiveMapper))(ExchangeAPI);
